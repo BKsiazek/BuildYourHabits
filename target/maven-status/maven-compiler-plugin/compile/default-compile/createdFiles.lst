@@ -1,2 +1,2 @@
-pl\bksiazek\LoginServlet.class
-pl\bksiazek\UserValidationService.class
+pl\bksiazek\controllers\LoginController.class
+pl\bksiazek\services\LoginService.class

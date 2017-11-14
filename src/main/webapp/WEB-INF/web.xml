@@ -1,11 +1,23 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0">
+<?xml version="1.0" encoding="UTF-8"?>
 
-	<display-name>To do List</display-name>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+         version="2.5" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"> 
 
-	<welcome-file-list>
-		<welcome-file>login</welcome-file>
-	</welcome-file-list>
+  	<display-name>Build Your Habits</display-name>
+  
+  	<welcome-file-list>
+  		<welcome-file>/WEB-INF/views/login.jsp</welcome-file>
+  	</welcome-file-list>
+  
+  	<servlet>
+  		<servlet-name>dispatcher</servlet-name>
+  		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+ 	</servlet>
+  	<servlet-mapping>
+  		<servlet-name>dispatcher</servlet-name>
+  		<url-pattern>/</url-pattern>
+  	</servlet-mapping>
 
 </web-app>
