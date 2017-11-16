@@ -1,2 +1,5 @@
-pl\bksiazek\controllers\LoginController.class
-pl\bksiazek\services\LoginService.class
+buildyourhabits\controllers\HabitController.class
+buildyourhabits\services\LoginService.class
+buildyourhabits\models\Habit.class
+buildyourhabits\controllers\LoginController.class
+buildyourhabits\services\HabitService.class

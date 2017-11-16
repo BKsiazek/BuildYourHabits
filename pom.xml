@@ -28,8 +28,33 @@
     	<artifactId>spring-context</artifactId>
     	<version>5.0.1.RELEASE</version>
     </dependency>
+    <dependency>
+    	<groupId>org.webjars</groupId>
+    	<artifactId>bootstrap</artifactId>
+    	<version>4.0.0-beta.2</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.webjars</groupId>
+    	<artifactId>jquery</artifactId>
+    	<version>3.2.1</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>BuildYourHabits</finalName>
+	<pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<verbose>true</verbose>
+					<source>1.8</source>
+					<target>1.8</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+		</plugins>
+	</pluginManagement>
   </build>
 </project>

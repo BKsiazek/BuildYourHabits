@@ -1,2 +1,5 @@
-C:\Users\Bartek\eclipse-workspace\BuildYourHabits\src\main\java\pl\bksiazek\controllers\LoginController.java
-C:\Users\Bartek\eclipse-workspace\BuildYourHabits\src\main\java\pl\bksiazek\services\LoginService.java
+C:\Users\Bartek\eclipse-workspace\BuildYourHabits\src\main\java\buildyourhabits\controllers\HabitController.java
+C:\Users\Bartek\eclipse-workspace\BuildYourHabits\src\main\java\buildyourhabits\models\Habit.java
+C:\Users\Bartek\eclipse-workspace\BuildYourHabits\src\main\java\buildyourhabits\services\LoginService.java
+C:\Users\Bartek\eclipse-workspace\BuildYourHabits\src\main\java\buildyourhabits\services\HabitService.java
+C:\Users\Bartek\eclipse-workspace\BuildYourHabits\src\main\java\buildyourhabits\controllers\LoginController.java
