@@ -1,1 +1,1 @@
-web: java -jar target/BuildYourHabits.war
+web: sh target/bin/webapp
