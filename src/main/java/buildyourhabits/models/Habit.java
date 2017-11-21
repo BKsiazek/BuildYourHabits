@@ -2,13 +2,22 @@ package buildyourhabits.models;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class Habit {
 	
 	private int id;
 	private String user;
+	
+	@Size(min=1, message = "Enter at least 1 character")
 	private String description;
+	
 	private Date targetDate;
 	private boolean isDone;
+	
+	public Habit(){
+		
+	}
 	
 	public Habit(int id, String user, String description, Date targetDate, boolean isDone) {
 		super();

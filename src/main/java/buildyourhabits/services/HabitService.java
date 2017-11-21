@@ -44,4 +44,17 @@ public class HabitService {
 		return filteredHabits;
 	}
 	
+	public Habit retrieveHabit(int id) {
+		for (Habit habit : habits) {
+			if(habit.getId() == id)
+				return habit;
+		}
+		return null;
+	}
+	
+	public void updateHabit(Habit habit) {
+		habits.remove(habit);
+		habits.add(habit);
+	}
+	
 }

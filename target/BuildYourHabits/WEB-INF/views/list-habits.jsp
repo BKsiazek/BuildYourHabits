@@ -1,43 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>List Of Habits</title>
-	<link href="webjars/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-	Hi ${name}<br>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 	
-	<table>
-		<caption>Your habits</caption>
+<div class="container">
+	<table class="table table-striped">		
 		<thead>
 			<tr>
 				<th>Description</th>
 				<th>Target Date</th>
-				<th>Is Completed</th>			
+				<th>Is Completed</th>	
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<jstl:forEach items="${habits}" var="habit">
 				<tr>
 					<td>${habit.description}</td>
-					<td>${habit.targetDate}</td>
+					<td><fmt:formatDate pattern="dd/MM/yyyy" value="${habit.targetDate}"/></td>
 					<td>${habit.done}</td>
+					<td>
+						<a class="btn btn-info" href="/update-habit?id=${habit.id}">Update</a>
+						<a class="btn btn-danger" href="/delete-habit?id=${habit.id}">Delete</a>
+					</td>
 				</tr>
 			</jstl:forEach>
 		</tbody>
 	</table>
-	 
-	<br>
-	
-	
-	
-	<br>
-	<a class="button" href="/add-habit">Add</a>
-	
-	<script src="webjars/jquery/3.2.1/jquery.min.js"></script>
-	<script src="webjars/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-	    
-</body>
-</html>
+	<div>
+		<a class="btn btn-success" href="/add-habit">Add</a>
+	</div>
+</div>
+
+<%@ include file="common/footer.jspf" %>

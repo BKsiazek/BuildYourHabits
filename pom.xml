@@ -38,6 +38,17 @@
     	<artifactId>jquery</artifactId>
     	<version>3.2.1</version>
     </dependency>
+    <dependency>
+    	<groupId>javax</groupId>
+    	<artifactId>javaee-web-api</artifactId>
+    	<version>8.0</version>
+    	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-validator</artifactId>
+    	<version>6.0.4.Final</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>BuildYourHabits</finalName>
