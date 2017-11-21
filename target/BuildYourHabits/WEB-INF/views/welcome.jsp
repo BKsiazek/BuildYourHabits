@@ -6,6 +6,6 @@
 </head>
 <body>
 	Welcome ${name}.<br>
-	Now you can <a href="/list-habits">manage your habits.</a>
+	Now you can <a href="./list-habits">manage your habits.</a>
 </body>
 </html>
