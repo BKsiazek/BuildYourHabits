@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -33,13 +35,23 @@ public class HabitController {
 	
 	@RequestMapping(value = "/list-habits", method = RequestMethod.GET)
 	public String showListOfHabits(ModelMap model) {
-		model.addAttribute("habits", service.retrieveHabits("Bartek"));
+		model.addAttribute("habits", service.retrieveHabits(retrieveLoggedInUserName()));
 		return "list-habits";
+	}
+
+	private String retrieveLoggedInUserName() {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		if(principal instanceof UserDetails)
+			return ((UserDetails)principal).getUsername();
+		
+		return principal.toString();
 	}
 	
 	@RequestMapping(value = "/add-habit", method = RequestMethod.GET)
 	public String showHabitPage(ModelMap model) {
-		model.addAttribute("habit", new Habit(0, "Bartek", "", new Date(), false));
+		model.addAttribute("habit", new Habit(0, retrieveLoggedInUserName(), "", new Date(), false));
 		return "habit";
 	}
 	
@@ -49,7 +61,7 @@ public class HabitController {
 		if(result.hasErrors())
 			return "habit";
 		
-		service.addHabit("Bartek", habit.getDescription(), habit.getTargetDate(), false);
+		service.addHabit(retrieveLoggedInUserName(), habit.getDescription(), habit.getTargetDate(), false);
 		return "redirect:list-habits";
 	}
 	
@@ -66,8 +78,7 @@ public class HabitController {
 		if(result.hasErrors())
 			return "habit";
 		
-		habit.setUser("Bartek");
-		
+		habit.setUser(retrieveLoggedInUserName());
 		service.updateHabit(habit);
 		
 		return "redirect:list-habits";
