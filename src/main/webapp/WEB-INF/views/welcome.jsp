@@ -2,7 +2,6 @@
 <%@ include file="common/navigation.jspf" %>
 
 <div class="container">
-	Welcome ${name}.<br>
 	Now you can <a href="./list-habits">manage your habits.</a>
 </div>
 

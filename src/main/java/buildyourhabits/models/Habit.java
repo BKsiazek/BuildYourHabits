@@ -9,7 +9,7 @@ public class Habit {
 	private int id;
 	private String user;
 	
-	@Size(min=1, message = "Enter at least 1 character")
+	@Size(min=1, message = "Enter at least 1 character.")	//TODO delete it later
 	private String description;
 	
 	private Date targetDate;

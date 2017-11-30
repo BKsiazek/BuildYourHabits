@@ -1,5 +1,11 @@
+buildyourhabits\services\UserService.class
+buildyourhabits\models\User.class
+buildyourhabits\controllers\UserController.class
+buildyourhabits\controllers\LogoutController.class
+buildyourhabits\services\HabitService.class
+buildyourhabits\models\ProbnyUser.class
+buildyourhabits\exceptions\ExceptionController.class
 buildyourhabits\security\SecurityConfiguration.class
 buildyourhabits\controllers\HabitController.class
 buildyourhabits\controllers\WelcomeController.class
 buildyourhabits\models\Habit.class
-buildyourhabits\services\HabitService.class

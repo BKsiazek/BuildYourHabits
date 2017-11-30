@@ -3,8 +3,11 @@ package buildyourhabits.controllers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +28,10 @@ import buildyourhabits.services.HabitService;
 @Controller
 public class HabitController {
 	
+	private Log logger = LogFactory.getLog(ExceptionController.class);
+	
 	@Autowired
-	HabitService service;
+	private HabitService service;
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -88,5 +94,12 @@ public class HabitController {
 	public String deleteHabit(@RequestParam int id) {
 		service.deleteHabit(id);
 		return "redirect:list-habits";
+	}
+	
+	@ExceptionHandler(value=Exception.class)
+	public String handleException(HttpServletRequest request, Exception ex) {
+		logger.error("Request " + request.getRequestURL() + " threw an exception.", ex);
+		
+		return "error-specific";
 	}
 }
