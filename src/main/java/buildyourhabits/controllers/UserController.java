@@ -19,26 +19,21 @@ public class UserController {
 	private UserService service;
 	
 	@RequestMapping(value = "/sign-up", method = RequestMethod.GET)
-	public String showAddUserPage(ModelMap model) {
+	public String showSignUpPage(ModelMap model) {
 		model.addAttribute("user", new User());
+		
 		return "user";
 	}
 	
 	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-	public String addUser(@Valid User user, BindingResult result) {
+	public String signUp(@Valid User user, BindingResult result) {
 		
 		if(result.hasErrors())
 			return "user";
 		
-		user.setId(104);	//TODO do sth with it
-		
-		try {
-			service.addUserToDatabase(user);
-		} catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
+		user.setRole("ROLE_USER");
+		service.createUser(user);
 		
 		return "redirect:login";
 	}
-	
 }

@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Build Your Habits</title>
 	<link href="webjars/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +15,10 @@
 	<br>
 	<div class="container">
 		<h2>Log in to track your habits</h2>
-		<form th:action="@{/login}" method="post">
+		<font color="red">
+	        ${SPRING_SECURITY_LAST_EXCEPTION.message}
+        </font>
+		<form action="<%=request.getContextPath()%>/login" method="post">
 		    <div><label> Username  <input class="form-control" type="text" name="username" />
 		    </label></div>
 		    <div><label> Password <input class="form-control" type="password" name="password" />
@@ -26,6 +27,5 @@
 		    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
 		</form>
 	</div>
-	
 </body>
 </html>

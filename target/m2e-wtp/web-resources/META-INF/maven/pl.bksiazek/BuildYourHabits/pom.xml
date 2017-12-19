@@ -70,8 +70,6 @@
 	    <artifactId>postgresql</artifactId>
 	    <version>42.1.4</version>
 	</dependency>
-    
-    
   </dependencies>
   <build>
     <finalName>BuildYourHabits</finalName>

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LogoutController {
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
+	public String logOut(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		if(auth != null)
@@ -23,7 +23,7 @@ public class LogoutController {
 		//to be sure if session is really closed
 		request.getSession().invalidate();
 		
-		return "redirect:/";
+		return "redirect:/login";	//TODO czy to zadzia³a?
 	}
 
 }

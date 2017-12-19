@@ -11,7 +11,7 @@
 
 <div class="container">
 	<h1>Add new user:</h1>
-	<form:form action="./add-user" method="post" modelAttribute="user">	
+	<form:form action="./sign-up" method="post" modelAttribute="user">	
 		<fieldset class="form-group">
 			<form:label path="name">Name</form:label>
 			<form:input path="name" type="text" class="form-control" required="required"/>

@@ -1,63 +1,127 @@
 package buildyourhabits.services;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 
+import buildyourhabits.configuration.JPAUtility;
 import buildyourhabits.models.Habit;
+import buildyourhabits.models.User;
 
 @Service
 public class HabitService {
-
-	private static List<Habit> habits = new ArrayList<Habit>();
-	private static int habitCount = 3;
-
-	static {
-		habits.add(new Habit(1, "Bartek", "Drink more water", new Date(), false));
-		habits.add(new Habit(2, "ZlyBartek", "Drink less water", new Date(), false));
-		habits.add(new Habit(3, "Bartek", "Get more sleep", new Date(), false));
-		habits.add(new Habit(4, "ZlyBartek", "Sleep less than 5 hours", new Date(), false));
-		habits.add(new Habit(5, "ZlyBartek", "Eat sweets at least three times a day", new Date(), false));
-		habits.add(new Habit(6, "Bartek", "Work out 3 times per week", new Date(), false));
-	}
 	
-	public void addHabit(String name, String description, Date targetDate, boolean isDone) {
-		habits.add(new Habit(++habitCount, name, description, targetDate, isDone));
+	public void addHabit(Habit habit) {
+		
+		/*SessionFactory sf = HibernateService.createSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		session.save(habit);
+		
+		session.getTransaction().commit();
+		session.close();
+		sf.close();*/
+		
+		EntityManager entityManager = JPAUtility.getEntityManager();	
+		entityManager.getTransaction().begin();
+		
+		entityManager.persist(habit);
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 	
 	public void deleteHabit(int id) {
-		Iterator<Habit> iterator = habits.iterator();
-		while (iterator.hasNext()) {
-			Habit habit = iterator.next();
-			if (habit.getId() == id) {
-				iterator.remove();
-			}
-		}
+		
+		/*SessionFactory sf = HibernateService.createSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		session.createQuery("delete from Habit where habitID=:id").setParameter("id", id).executeUpdate();
+		
+		session.getTransaction().commit();
+		session.close();
+		sf.close();*/
+		
+		EntityManager entityManager = JPAUtility.getEntityManager();	
+		entityManager.getTransaction().begin();
+		
+		Habit habit = entityManager.find(Habit.class, id);
+		entityManager.remove(habit);
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();	
 	}
 	
-	public List<Habit> retrieveHabits(String user) {
-		List<Habit> filteredHabits = new ArrayList<Habit>();
-		for (Habit habit : habits) {
-			if (habit.getUser().equals(user))
-				filteredHabits.add(habit);
-		}
-		return filteredHabits;
+	public List<Habit> retrieveHabits(User user) {
+		
+		/*SessionFactory sf = HibernateService.createSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		List<Habit> habits = session.createQuery("from Habit where owner=:owner").setParameter("owner", user).getResultList();
+		
+		session.getTransaction().commit();
+		session.close();
+		sf.close();*/
+		
+		
+		EntityManager entityManager = JPAUtility.getEntityManager();	
+		entityManager.getTransaction().begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Habit> habits = entityManager.createQuery("from Habit where owner=:owner").setParameter("owner", user).getResultList();
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		
+		return habits;
 	}
 	
 	public Habit retrieveHabit(int id) {
-		for (Habit habit : habits) {
-			if(habit.getId() == id)
-				return habit;
-		}
-		return null;
+		
+		/*SessionFactory sf = HibernateService.createSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		Habit habit = session.get(Habit.class, id);
+		
+		session.getTransaction().commit();
+		session.close();
+		sf.close();*/
+		
+		EntityManager entityManager = JPAUtility.getEntityManager();	
+		entityManager.getTransaction().begin();
+		
+		Habit habit = entityManager.find(Habit.class, id);
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		
+		return habit;
 	}
 	
 	public void updateHabit(Habit habit) {
-		habits.remove(habit);
-		habits.add(habit);
+		
+		/*SessionFactory sf = HibernateService.createSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		session.update(habit);
+		
+		session.getTransaction().commit();
+		session.close();
+		sf.close();*/
+		
+		EntityManager entityManager = JPAUtility.getEntityManager();	
+		entityManager.getTransaction().begin();
+		
+		habit = entityManager.merge(habit);
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 	
 }

@@ -1,9 +1,17 @@
 <%@ include file="common/header.jspf" %>
-<%@ include file="common/navigation.jspf" %>
+
+<nav role="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="navbar-header">
+			<a class="navbar-brand text-white">BuildYourHabits</a>
+		</div>
+		<ul class="navbar-nav ml-auto">
+			<li><a class="nav-link" href="./login">Log in</a></li>
+		</ul>
+	</nav>
 
 <div class="container">
 	<h1>Add new user:</h1>
-	<form:form action="./add-user" method="post" modelAttribute="user">	
+	<form:form action="./sign-up" method="post" modelAttribute="user">	
 		<fieldset class="form-group">
 			<form:label path="name">Name</form:label>
 			<form:input path="name" type="text" class="form-control" required="required"/>

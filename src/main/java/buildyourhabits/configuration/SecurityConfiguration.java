@@ -6,26 +6,28 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import buildyourhabits.services.MyAppUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
+	private MyAppUserDetailsService myAppUserDetailsService;
+	
+	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("Bartek").password("pass").roles("USER", "ADMIN");
-		auth.inMemoryAuthentication().withUser("ZlyBartek").password("pass2").roles("USER");
+		auth.userDetailsService(myAppUserDetailsService);//.passwordEncoder(passwordEncoder());
 	}
+	
+	/*@Bean
+    public PasswordEncoder passwordEncoder() {
+	        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	        return passwordEncoder;
+    }*/
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.authorizeRequests().antMatchers("./login").permitAll().
-//			antMatchers("/", "/*habit*/**").access("hasRole('USER')").and()
-//			.formLogin()
-//			.loginPage("customizedLogin.jsp")
-//			.loginProcessingUrl("./perform-login")
-//            .defaultSuccessUrl("welcome.jsp")
-//            .failureUrl("customizedLogin.jsp?error=true");
 		
 		http
 			.authorizeRequests()

@@ -3,7 +3,8 @@
 
 <div class="container">
 	<h1>Add/Update a habit:</h1>
-	<form:form method="post" modelAttribute="habit">	
+	<form:form method="post" modelAttribute="habit">
+		<form:hidden path="habitID"/> 
 		<fieldset class="form-group">
 			<form:label path="description">Description</form:label>
 			<form:input path="description" type="text" class="form-control" required="required" /> 

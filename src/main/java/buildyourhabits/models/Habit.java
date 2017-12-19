@@ -2,12 +2,24 @@ package buildyourhabits.models;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Habit {
 	
-	private int id;
-	private String user;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int habitID;
+	
+	@ManyToOne
+	@JoinColumn(name="userID", nullable=false)
+	private User owner;
 	
 	@Size(min=1, message = "Enter at least 1 character.")	//TODO delete it later
 	private String description;
@@ -19,26 +31,26 @@ public class Habit {
 		
 	}
 	
-	public Habit(int id, String user, String description, Date targetDate, boolean isDone) {
+	public Habit(int habitID, User owner, String description, Date targetDate, boolean isDone) {
 		super();
-		this.id = id;
-		this.user = user;
+		this.habitID = habitID;
+		this.owner = owner;
 		this.description = description;
 		this.targetDate = targetDate;
 		this.isDone = isDone;
 	}
-	
-	public int getId() {
-		return id;
+
+	public int getHabitID() {
+		return habitID;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setHabitID(int habitID) {
+		this.habitID = habitID;
 	}
-	public String getUser() {
-		return user;
+	public User getOwner() {
+		return owner;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 	public String getDescription() {
 		return description;
@@ -61,14 +73,15 @@ public class Habit {
 	
 	@Override
 	public String toString() {
-		return String.format("ToString - Habit [id=%s, user=%s, description=%s, targetDate=%s, isDone=%s]", id, user, description,
-				targetDate, isDone);
+		return String.format("Habit [habitID=%s, owner=%s, description=%s, targetDate=%s, isDone=%s]", habitID, owner,
+				description, targetDate, isDone);
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + habitID;
 		return result;
 	}
 	@Override
@@ -80,11 +93,8 @@ public class Habit {
 		if (getClass() != obj.getClass())
 			return false;
 		Habit other = (Habit) obj;
-		if (id != other.id)
+		if (habitID != other.habitID)
 			return false;
 		return true;
 	}
-	
-	
-	
 }

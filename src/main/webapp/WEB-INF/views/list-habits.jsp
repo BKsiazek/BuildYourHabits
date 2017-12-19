@@ -18,8 +18,8 @@
 					<td><fmt:formatDate pattern="dd/MM/yyyy" value="${habit.targetDate}"/></td>
 					<td>${habit.done}</td>
 					<td>
-						<a class="btn btn-info" href="./update-habit?id=${habit.id}">Update</a>
-						<a class="btn btn-danger" href="./delete-habit?id=${habit.id}">Delete</a>
+						<a class="btn btn-info" href="./update-habit?id=${habit.habitID}">Update</a>
+						<a class="btn btn-danger" href="./delete-habit?id=${habit.habitID}">Delete</a>
 					</td>
 				</tr>
 			</jstl:forEach>
