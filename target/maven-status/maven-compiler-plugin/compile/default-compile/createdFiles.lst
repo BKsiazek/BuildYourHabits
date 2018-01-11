@@ -1,9 +1,11 @@
 buildyourhabits\controllers\ExceptionController.class
 buildyourhabits\configuration\SecurityConfiguration.class
 buildyourhabits\models\User.class
+buildyourhabits\configuration\JPAUtility.class
 buildyourhabits\controllers\UserController.class
 buildyourhabits\services\HabitService.class
 buildyourhabits\services\MyAppUserDetailsService.class
+buildyourhabits\controllers\AdminPanelController.class
 buildyourhabits\services\UserService.class
 buildyourhabits\controllers\LogoutController.class
 buildyourhabits\services\HibernateService.class

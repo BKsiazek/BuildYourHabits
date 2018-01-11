@@ -98,5 +98,5 @@ public class HabitController {
 		service.deleteHabit(id);
 		
 		return "redirect:list-habits";
-	}
+	}	
 }

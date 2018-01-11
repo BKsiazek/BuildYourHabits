@@ -17,14 +17,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(myAppUserDetailsService);//.passwordEncoder(passwordEncoder());
+		auth.inMemoryAuthentication().withUser("admin").password("adminadmin").roles("ADMIN");
+		auth.userDetailsService(myAppUserDetailsService);
 	}
-	
-	/*@Bean
-    public PasswordEncoder passwordEncoder() {
-	        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	        return passwordEncoder;
-    }*/
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -34,6 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				.antMatchers("/resources/**").permitAll()
 				.antMatchers("/webjars/**").permitAll()
 				.antMatchers("/sign-up").permitAll()
+				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 				.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login").permitAll()

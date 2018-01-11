@@ -1,5 +1,7 @@
 package buildyourhabits.services;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Service;
@@ -57,6 +59,32 @@ public class UserService {
 		entityManager.close();
 		
 		return activeUser;
+	}
+	
+	public void deleteUser(int id) {
+		
+		EntityManager entityManager = JPAUtility.getEntityManager();	
+		entityManager.getTransaction().begin();
+		
+		User user = entityManager.find(User.class, id);
+		entityManager.remove(user);
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();	
+	}
+	
+	public List<User> retrieveAllUsers() {			
+			
+		EntityManager entityManager = JPAUtility.getEntityManager();	
+		entityManager.getTransaction().begin();
+			
+		@SuppressWarnings("unchecked")
+		List<User> users = entityManager.createQuery("from User").getResultList();
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();
+			
+		return users;
 	}
 	
 }

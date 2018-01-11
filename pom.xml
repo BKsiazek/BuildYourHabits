@@ -70,6 +70,12 @@
 	    <artifactId>postgresql</artifactId>
 	    <version>42.1.4</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
+	<dependency>
+	    <groupId>org.webjars</groupId>
+	    <artifactId>font-awesome</artifactId>
+	    <version>4.7.0</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>BuildYourHabits</finalName>
@@ -108,4 +114,5 @@
         	</plugin>
 		</plugins>
   </build>
+  
 </project>

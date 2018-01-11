@@ -2,6 +2,7 @@ package buildyourhabits.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class User {
 	
 	private String role;
 	
-	@OneToMany(mappedBy="owner")
+	@OneToMany(mappedBy="owner", cascade=CascadeType.REMOVE)
 	private List<Habit> habits;
 	
 	public int getUserID() {
