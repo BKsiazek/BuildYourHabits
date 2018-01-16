@@ -11,9 +11,18 @@
 			<form:errors path="description" cssClass="text-warning"/>
 		</fieldset>
 			
-		<fieldset class=" row col-md-2 form-group">
-			<form:label path="targetDate">Target Date</form:label>
+		<fieldset class="row col-md-2 form-group">
+			<form:label path="startDate">Start Date</form:label>
 			<div class="input-group date" id="dateRangePicker">
+				<form:input path="startDate" type="text" class="form-control" required="required"/>
+				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			</div>
+			<form:errors path="startDate" cssClass="text-warning"/>			
+		</fieldset>
+			
+		<fieldset class="row col-md-2 form-group">
+			<form:label path="targetDate">Target Date</form:label>
+			<div class="input-group date" id="dateRangePicker2">
 				<form:input path="targetDate" type="text" class="form-control" required="required"/>
 				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 			</div>
@@ -28,6 +37,13 @@
 <script>
 	$(document).ready(function() {
 		$('#dateRangePicker')
+		.datepicker({
+			format: 'dd/mm/yyyy'
+		});
+	});
+	
+	$(document).ready(function() {
+		$('#dateRangePicker2')
 		.datepicker({
 			format: 'dd/mm/yyyy'
 		});

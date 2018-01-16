@@ -56,7 +56,7 @@ public class HabitController {
 	
 	@RequestMapping(value = "/add-habit", method = RequestMethod.GET)
 	public String showAddHabitPage(ModelMap model) {
-		model.addAttribute("habit", new Habit(0, null, "", new Date(), false));
+		model.addAttribute("habit", new Habit(0, null, ""));
 		
 		return "habit";
 	}
@@ -77,7 +77,6 @@ public class HabitController {
 	public String showUpdateHabitPage(ModelMap model, @RequestParam int id) {
 		Habit habit = service.retrieveHabit(id);
 		model.addAttribute("habit", habit);
-		
 		return "habit";
 	}
 	
@@ -99,4 +98,23 @@ public class HabitController {
 		
 		return "redirect:list-habits";
 	}	
+	
+	@RequestMapping(value = "/habit-details", method = RequestMethod.GET)
+	public String showHabitDetails(ModelMap model, @RequestParam int id) {
+		Habit habit = service.retrieveHabit(id);
+		habit.setDaysLeft(service.getDaysToEnd(habit));
+		habit.setCompletionRate(service.getHabitCompletionRate(habit));
+		
+		model.addAttribute("habit", habit);
+		
+		return "habit-details";
+	}
+	
+	/*@RequestMapping(value = "/succesful-day", method = RequestMethod.POST)
+	public String addSuccesfulDay(@RequestParam int id) {
+		
+		service.AddCurrentDayAsSuccesful(id);
+		
+		return "redirect:habit-details?" + id;
+	}*/
 }

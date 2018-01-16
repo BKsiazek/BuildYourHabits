@@ -1,5 +1,9 @@
 package buildyourhabits.services;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -124,4 +128,53 @@ public class HabitService {
 		entityManager.close();
 	}
 	
+	public int getDaysToEnd(Habit habit) {
+		
+		LocalDateTime habitTargetDate = habit.getTargetDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		
+		return (int) DAYS.between(LocalDateTime.now(), habitTargetDate.plusDays(1));
+	}
+	
+	public int getHabitSuccessRate() {
+		//
+		return 0;
+	}
+	
+	public int getHabitCompletionRate(Habit habit) {
+		
+		LocalDateTime habitStartDate = habit.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		LocalDateTime habitTargetDate = habit.getTargetDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		
+		int daysFromStartToEnd = (int) DAYS.between(habitStartDate, habitTargetDate);
+		int daysFromStartToNow = (int) DAYS.between(habitStartDate, LocalDateTime.now());
+
+		return ((int)((float)daysFromStartToNow/(float)daysFromStartToEnd * 100f));
+	}
+	
+	/*public String convertFromLocalDateTimeToString(LocalDateTime date) {
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		
+		return date.format(formatter);
+	}
+	
+	public LocalDateTime convertFromStringToLocalDateTime(String s) {
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		
+		return LocalDateTime.parse(s, formatter);
+	}
+	
+	public void AddCurrentDayAsSuccesful(int id) {
+		
+		EntityManager entityManager = JPAUtility.getEntityManager();	
+		entityManager.getTransaction().begin();
+		
+		Habit habit = entityManager.find(Habit.class, id);
+		habit.succesfulDays.add(convertFromLocalDateTimeToString(LocalDateTime.now()));
+		
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		
+	}*/
 }

@@ -1,13 +1,13 @@
 package buildyourhabits.models;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -24,20 +24,37 @@ public class Habit {
 	@Size(min=1, message = "Enter at least 1 character.")	//TODO delete it later
 	private String description;
 	
+	private Date startDate;
 	private Date targetDate;
 	private boolean isDone;
+	
+	@Transient
+	private int daysLeft;
+
+	@Transient
+	private int successRate;
+
+	@Transient
+	private int completionRate;
+	
+	//@ElementCollection
+	//public List<String> succesfulDays = new ArrayList<String>();
 	
 	public Habit(){
 		
 	}
 	
-	public Habit(int habitID, User owner, String description, Date targetDate, boolean isDone) {
+	public Habit(int habitID, User owner, String description) {
 		super();
 		this.habitID = habitID;
 		this.owner = owner;
 		this.description = description;
-		this.targetDate = targetDate;
-		this.isDone = isDone;
+		this.startDate = new Date();
+		this.targetDate = new Date();
+		this.isDone = false;
+		this.daysLeft = 0;
+		this.successRate = 0;
+		this.completionRate = 0;
 	}
 
 	public int getHabitID() {
@@ -58,6 +75,13 @@ public class Habit {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 	public Date getTargetDate() {
 		return targetDate;
 	}
@@ -70,7 +94,30 @@ public class Habit {
 	public void setDone(boolean isDone) {
 		this.isDone = isDone;
 	}
-	
+	public int getDaysLeft() {
+		return daysLeft;
+	}
+
+	public void setDaysLeft(int daysLeft) {
+		this.daysLeft = daysLeft;
+	}
+
+	public int getSuccessRate() {
+		return successRate;
+	}
+
+	public void setSuccessRate(int successRate) {
+		this.successRate = successRate;
+	}
+
+	public int getCompletionRate() {
+		return completionRate;
+	}
+
+	public void setCompletionRate(int completionRate) {
+		this.completionRate = completionRate;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Habit [habitID=%s, owner=%s, description=%s, targetDate=%s, isDone=%s]", habitID, owner,

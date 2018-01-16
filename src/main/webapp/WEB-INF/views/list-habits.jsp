@@ -1,24 +1,23 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 	
-<div class="container">
+<div class="container col-md-5">
+	<br/>
 	<table class="table table-striped">		
 		<thead>
 			<tr>
 				<th>Description</th>
 				<th>Target Date</th>
-				<th>Is Completed</th>	
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<jstl:forEach items="${habits}" var="habit">
 				<tr>
-					<td>${habit.description}</td>
+					<td><a href="./habit-details?id=${habit.habitID}" style="color:black">${habit.description}</a></td>
 					<td><fmt:formatDate pattern="dd/MM/yyyy" value="${habit.targetDate}"/></td>
-					<td>${habit.done}</td>
 					<td>
-						<a class="btn btn-info" href="./update-habit?id=${habit.habitID}">Update</a>
+						<a class="btn btn-info" href="./habit-details?id=${habit.habitID}">Show</a>
 						<a class="btn btn-danger" href="./delete-habit?id=${habit.habitID}">Delete</a>
 					</td>
 				</tr>
