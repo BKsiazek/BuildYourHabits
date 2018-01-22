@@ -1,7 +1,7 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 	
-<div class="container col-md-5">
+<div class="container col-md-8">
 	<br/>
 	<table class="table table-striped">		
 		<thead>

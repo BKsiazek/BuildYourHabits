@@ -104,17 +104,25 @@ public class HabitController {
 		Habit habit = service.retrieveHabit(id);
 		habit.setDaysLeft(service.getDaysToEnd(habit));
 		habit.setCompletionRate(service.getHabitCompletionRate(habit));
+		habit.setSuccessRate(service.getHabitSuccessRate(id));
+		habit.setCurrentStreak(service.getHabitCurrentStreak(id));
+		habit.setLongestStreak(service.getHabitLongestStreak(id));
+		habit.setToday(service.isTodaySuccessful(id));
+		habit.setHasStarted(service.hasHabitStarted(id));
+		
+		if(habit.getHasStarted() == false)
+			habit.setCompletionRate(0);
 		
 		model.addAttribute("habit", habit);
 		
 		return "habit-details";
 	}
 	
-	/*@RequestMapping(value = "/succesful-day", method = RequestMethod.POST)
+	@RequestMapping(value = "/succesful-day", method = RequestMethod.GET)
 	public String addSuccesfulDay(@RequestParam int id) {
 		
-		service.AddCurrentDayAsSuccesful(id);
+		service.addOrRemoveCurrentDayFromSuccessfulDays(id);
 		
-		return "redirect:habit-details?" + id;
-	}*/
+		return "redirect:habit-details?id=" + Integer.toString(id);
+	}
 }

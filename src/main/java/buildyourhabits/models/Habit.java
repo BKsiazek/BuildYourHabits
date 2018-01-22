@@ -1,6 +1,10 @@
 package buildyourhabits.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,8 +41,20 @@ public class Habit {
 	@Transient
 	private int completionRate;
 	
-	//@ElementCollection
-	//public List<String> succesfulDays = new ArrayList<String>();
+	@Transient
+	private int currentStreak;
+	
+	@Transient
+	private int longestStreak;
+	
+	@ElementCollection
+	public List<String> succesfulDays;
+	
+	@Transient
+	private Boolean today;
+	
+	@Transient
+	private Boolean hasStarted;
 	
 	public Habit(){
 		
@@ -55,6 +71,9 @@ public class Habit {
 		this.daysLeft = 0;
 		this.successRate = 0;
 		this.completionRate = 0;
+		this.currentStreak = 0;
+		this.succesfulDays = new ArrayList<String>();
+		this.today = false;
 	}
 
 	public int getHabitID() {
@@ -78,7 +97,6 @@ public class Habit {
 	public Date getStartDate() {
 		return startDate;
 	}
-
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
@@ -97,25 +115,56 @@ public class Habit {
 	public int getDaysLeft() {
 		return daysLeft;
 	}
-
 	public void setDaysLeft(int daysLeft) {
 		this.daysLeft = daysLeft;
 	}
-
 	public int getSuccessRate() {
 		return successRate;
 	}
-
 	public void setSuccessRate(int successRate) {
 		this.successRate = successRate;
 	}
-
 	public int getCompletionRate() {
 		return completionRate;
 	}
-
 	public void setCompletionRate(int completionRate) {
 		this.completionRate = completionRate;
+	}
+	public int getCurrentStreak() {
+		return currentStreak;
+	}
+	public void setCurrentStreak(int currentStreak) {
+		this.currentStreak = currentStreak;
+	}
+	
+	public int getLongestStreak() {
+		return longestStreak;
+	}
+
+	public void setLongestStreak(int longestStreak) {
+		this.longestStreak = longestStreak;
+	}
+
+	public List<String> getSuccesfulDays() {
+		return succesfulDays;
+	}
+	public void setSuccesfulDays(List<String> succesfulDays) {
+		this.succesfulDays = succesfulDays;
+	}
+	public Boolean getToday() {
+		return today;
+	}
+
+	public void setToday(Boolean isTodaySuccesful) {
+		this.today = isTodaySuccesful;
+	}
+	
+	public Boolean getHasStarted() {
+		return hasStarted;
+	}
+
+	public void setHasStarted(Boolean hasStarted) {
+		this.hasStarted = hasStarted;
 	}
 
 	@Override
